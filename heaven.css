@@ -1,0 +1,15 @@
+/*background colour*/
+body {
+    background-color: #d8e6f3;
+}
+
+/*block colour*/
+.block {
+    border: 1px solid #6565cd;
+    background-color: #c7c7ed;
+}
+
+/*text colour*/
+body, .hlink {
+    color: black;
+}

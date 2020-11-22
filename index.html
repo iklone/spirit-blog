@@ -1,0 +1,90 @@
+<head>
+    <title>Highly Responsive to Spirits</title>
+
+    <meta http-equiv="content-type" content="charset=utf-8"/>
+
+    <link rel="stylesheet" type="text/css" href="./main.css">
+    <link rel="stylesheet" type="text/css" href="./heaven.css">
+
+    <script>
+        maria = ["dance", "disgust", "glasses", "gong", "languages", "neko", "okay", "phone", "romance", "scold", "sing", "snooker"];
+
+        function addPost(file) {
+            
+
+            //create image
+            newImage = document.createElement("img");
+            newImage.setAttribute("src", "./files/" + file + ".jpg");
+
+            //create title
+            newTitle = document.createElement("div");
+            newTitle.setAttribute("class", "postTitle");
+            newTitle.innerText = file;
+
+            //create post div
+            newPost = document.createElement("div");
+            newPost.setAttribute("class", "post");
+            newPost.appendChild(newImage);
+            newPost.appendChild(newTitle);
+
+            //add to list
+            postList = document.getElementById("postList");
+            postList.appendChild(newPost);
+        }
+
+        function addPostRow(first, second) {
+            addPost(maria[first]);
+            addPost(maria[second]);
+        }
+
+        function addPostRows(num) {
+            for (i = 0; i < num; i++) {
+                ranFirst = Math.floor(Math.random() * maria.length);
+                ranSecond = Math.floor(Math.random() * maria.length);
+                addPostRow(ranFirst, ranSecond);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    
+    <div class="box">
+        <div class="block" id="header">
+            <h1>Highly Responsive to Spirits</h1>
+            <h2>Heaven/Hell</h2>
+            A blog by <a class="hlink" href="http://iklone.org">iklone</a>.
+        </div>
+    </div>
+
+    <div id="body">
+        <div class="box" id="left">
+            <div class="block">
+                <h3>Description</h3>
+            </div>
+        </div>
+
+        <div class="box" id="centre">
+            <div class="block">
+                <div id="postList"></div>
+                <div id="extendList" onclick='addPostRows(4);'>▼</div>
+            </div>
+        </div>
+
+        <div class="box" id="right">
+            <div class="block">
+                <h3>Links</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="block" id="footer">
+            Blog by <a class="hlink" href="http://iklone.org">iklone</a> 2020
+        </div>
+    </div>
+
+    <script>
+        addPostRows(2);
+    </script>
+</body>
