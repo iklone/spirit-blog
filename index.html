@@ -3,11 +3,21 @@
 
     <meta http-equiv="content-type" content="charset=utf-8"/>
 
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="./main.css">
     <link rel="stylesheet" type="text/css" href="./heaven.css">
 
     <script>
         maria = ["dance", "disgust", "glasses", "gong", "languages", "neko", "okay", "phone", "romance", "scold", "sing", "snooker"];
+
+        function setipsum() {
+            ipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+            ipsumClasses = document.getElementsByClassName("ipsum");
+
+            for (ipsumClass in ipsumClasses) {
+                ipsumClasses[ipsumClass].innerHTML = ipsum;
+            }
+        }
 
         function addPost(file) {
             
@@ -61,19 +71,26 @@
         <div class="box" id="left">
             <div class="block">
                 <h3>Description</h3>
+                <div class="ipsum"></div>
             </div>
         </div>
 
         <div class="box" id="centre">
             <div class="block">
                 <div id="postList"></div>
-                <div id="extendList" onclick='addPostRows(4);'>▼</div>
+                <div id="extendList" onclick='addPostRows(4);'>Load More ▼</div>
             </div>
         </div>
 
         <div class="box" id="right">
             <div class="block">
                 <h3>Links</h3>
+                <ul>
+                    <li><a href="https://iklone.org">iklone.org</a> is my landing page.</li>
+                    <li><a href="https://github.com/iklone">Github</a> for source code.</li>
+                    <li><a href="https://twitter.com/iklone">Twitter</a> for microblogging.</li>
+                    <li><a href="https://myanimelist.net/profile/iklone">My Anime List</a> for anime/manga.</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -86,5 +103,6 @@
 
     <script>
         addPostRows(2);
+        setipsum();
     </script>
 </body>
