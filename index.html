@@ -9,6 +9,7 @@
 
     <script>
         maria = ["dance", "disgust", "glasses", "gong", "languages", "neko", "okay", "phone", "romance", "scold", "sing", "snooker"];
+        postNum = 0;
 
         function setipsum() {
             ipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
@@ -19,17 +20,15 @@
             }
         }
 
-        function addPost(file) {
-            
-
+        function addPost(title, img) {
             //create image
             newImage = document.createElement("img");
-            newImage.setAttribute("src", "./files/" + file + ".jpg");
+            newImage.setAttribute("src", img);
 
             //create title
             newTitle = document.createElement("div");
             newTitle.setAttribute("class", "postTitle");
-            newTitle.innerText = file;
+            newTitle.innerText = title;
 
             //create post div
             newPost = document.createElement("div");
@@ -40,19 +39,32 @@
             //add to list
             postList = document.getElementById("postList");
             postList.appendChild(newPost);
+            postNum++;
         }
 
-        function addPostRow(first, second) {
-            addPost(maria[first]);
-            addPost(maria[second]);
-        }
+        function addPostBatch(num) {
+            //live code
+            var xhttp;
 
-        function addPostRows(num) {
-            for (i = 0; i < num; i++) {
-                ranFirst = Math.floor(Math.random() * maria.length);
-                ranSecond = Math.floor(Math.random() * maria.length);
-                addPostRow(ranFirst, ranSecond);
-            }
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                    if (this.responseText == "") { //no more posts so hide extend button
+                        document.getElementById("extendList").setAttribute("style", "display: none;");
+                    } else { // evaluate response
+                        eval(this.responseText);
+                    }
+                }
+            };
+            xhttp.open("GET", "getPost.php?start=" + postNum + "&num=" + num, true);
+            xhttp.send();
+
+            //code for testing offline with Marias
+            /*for (i = 0; i < num; i++) {
+                ran = Math.floor(Math.random() * maria.length);
+                addPost(maria[ran], "./files/" + maria[ran] + ".jpg");
+            }*/
         }
     </script>
 </head>
@@ -78,7 +90,7 @@
         <div class="box" id="centre">
             <div class="block">
                 <div id="postList"></div>
-                <div id="extendList" onclick='addPostRows(4);'>Load More ▼</div>
+                <div id="extendList" onclick='addPostBatch(1);'>Load More ▼</div>
             </div>
         </div>
 
@@ -102,7 +114,7 @@
     </div>
 
     <script>
-        addPostRows(2);
+        addPostBatch(1);
         setipsum();
     </script>
 </body>
