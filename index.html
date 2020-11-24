@@ -44,8 +44,7 @@
 
         function addPostBatch(num) {
             //live code
-            var xhttp;
-
+            /*var xhttp;
             xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
@@ -58,13 +57,13 @@
                 }
             };
             xhttp.open("GET", "getPost.php?start=" + postNum + "&num=" + num, true);
-            xhttp.send();
+            xhttp.send();*/
 
             //code for testing offline with Marias
-            /*for (i = 0; i < num; i++) {
+            for (i = 0; i < num; i++) {
                 ran = Math.floor(Math.random() * maria.length);
                 addPost(maria[ran], "./files/" + maria[ran] + ".jpg");
-            }*/
+            }
         }
     </script>
 </head>
@@ -90,7 +89,7 @@
         <div class="box" id="centre">
             <div class="block">
                 <div id="postList"></div>
-                <div id="extendList" onclick='addPostBatch(1);'>Load More ▼</div>
+                <div id="extendList" onclick='addPostBatch(2);'>Load More ▼</div>
             </div>
         </div>
 
@@ -114,7 +113,7 @@
     </div>
 
     <script>
-        addPostBatch(1);
+        addPostBatch(4);
         setipsum();
     </script>
 </body>
