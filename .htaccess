@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule ^post\/.*$ post.html

@@ -1,0 +1,94 @@
+<head>
+    <title id="pageTitle">Highly Responsive to Spirits</title>
+
+    <meta http-equiv="content-type" content="charset=utf-8"/>
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    <link rel="stylesheet" type="text/css" href="../heaven.css">
+
+    <script>
+        maria = ["dance", "disgust", "glasses", "gong", "languages", "neko", "okay", "phone", "romance", "scold", "sing", "snooker"];
+        postNum = 0;
+
+        function setipsum() {
+            ipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+            ipsumClasses = document.getElementsByClassName("ipsum");
+
+            for (ipsumClass in ipsumClasses) {
+                ipsumClasses[ipsumClass].innerHTML = ipsum;
+            }
+        }
+
+        //load up retrieved data to page
+        async function loadData(title, date, img, textSrc) {
+            //set title
+            document.getElementById("pageTitle").innerHTML = title + " - iklone.org";
+            document.getElementById("blogTitle").innerHTML = title;
+
+            //load image
+            document.getElementById("blogImage").setAttribute("src", "../posts/" + img);
+
+            //load body
+            bodyResponse = await fetch("/test.html");
+            bodyText = await bodyResponse.text();
+            document.getElementById("blogBody").innerHTML = bodyText;
+        }
+
+        function loadBlog() {
+            //find and isolate blog id
+            url = window.location.href;
+            blogID = url.replace(/^.*[\\\/]/, '');
+            blogID = blogID.replace(/[\., \/, \?].*/, '');
+            console.log(blogID);
+
+            //code for testing offline
+            loadData(blogID, 0, "glasses.jpg", "body");
+        }
+    </script>
+</head>
+
+<body>
+    
+    <div class="box">
+        <div class="block" id="header">
+            <h1>Highly Responsive to Spirits</h1>
+            <h2>Heaven/Hell</h2>
+            A blog by <a class="hlink" href="http://iklone.org">iklone</a>.
+        </div>
+    </div>
+
+    <div id="body">
+        <div class="box" id="left"></div>
+
+        <div class="box" id="centre">
+            <div class="block">
+                <img id="blogImage">
+                <h1 id="blogTitle"></h1>
+                <div id="blogBody"></div>
+            </div>
+        </div>
+
+        <div class="box" id="right">
+            <div class="block">
+                <h3>Links</h3>
+                <ul>
+                    <li><a href="https://iklone.org">iklone.org</a> is my landing page.</li>
+                    <li><a href="https://github.com/iklone">Github</a> for source code.</li>
+                    <li><a href="https://twitter.com/iklone">Twitter</a> for microblogging.</li>
+                    <li><a href="https://myanimelist.net/profile/iklone">My Anime List</a> for anime/manga.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="block" id="footer">
+            Blog by <a class="hlink" href="http://iklone.org">iklone</a> 2020
+        </div>
+    </div>
+
+    <script>
+        loadBlog()
+    </script>
+</body>
