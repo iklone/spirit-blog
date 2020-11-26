@@ -4,8 +4,9 @@
     <meta http-equiv="content-type" content="charset=utf-8"/>
 
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../main.css">
-    <link rel="stylesheet" type="text/css" href="../heaven.css">
+    <link rel="stylesheet" type="text/css" href="/main.css">
+    <link rel="stylesheet" type="text/css" href="/post.css">
+    <link rel="stylesheet" type="text/css" href="/heaven.css">
 
     <script>
         maria = ["dance", "disgust", "glasses", "gong", "languages", "neko", "okay", "phone", "romance", "scold", "sing", "snooker"];
@@ -27,10 +28,10 @@
             document.getElementById("blogTitle").innerHTML = title;
 
             //load image
-            document.getElementById("blogImage").setAttribute("src", "../posts/" + img);
+            document.getElementById("blogImage").setAttribute("src", img);
 
             //load body
-            bodyResponse = await fetch("/test.html");
+            bodyResponse = await fetch("/posts/" + textSrc);
             bodyText = await bodyResponse.text();
             document.getElementById("blogBody").innerHTML = bodyText;
         }
@@ -42,21 +43,32 @@
             blogID = blogID.replace(/[\., \/, \?].*/, '');
             console.log(blogID);
 
+            //live code with DB
+            var xhttp;
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                    if (this.responseText == "") { //no known post show 404
+                        window.location.href = "../404";
+                    } else { // evaluate response
+                        eval(this.responseText);
+                    }
+                }
+            };
+            xhttp.open("GET", "/getArticle.php?id=" + blogID, true);
+            xhttp.send();
+
             //code for testing offline
-            loadData(blogID, 0, "glasses.jpg", "body");
+            //loadData(blogID, 0, "../posts/glasses.jpg", blogID);
         }
     </script>
+
+    <script src="/pageLoader.js"></script>
 </head>
 
 <body>
-    
-    <div class="box">
-        <div class="block" id="header">
-            <h1>Highly Responsive to Spirits</h1>
-            <h2>Heaven/Hell</h2>
-            A blog by <a class="hlink" href="http://iklone.org">iklone</a>.
-        </div>
-    </div>
+    <div id="headerLoad"></div>
 
     <div id="body">
         <div class="box" id="left"></div>
@@ -69,26 +81,13 @@
             </div>
         </div>
 
-        <div class="box" id="right">
-            <div class="block">
-                <h3>Links</h3>
-                <ul>
-                    <li><a href="https://iklone.org">iklone.org</a> is my landing page.</li>
-                    <li><a href="https://github.com/iklone">Github</a> for source code.</li>
-                    <li><a href="https://twitter.com/iklone">Twitter</a> for microblogging.</li>
-                    <li><a href="https://myanimelist.net/profile/iklone">My Anime List</a> for anime/manga.</li>
-                </ul>
-            </div>
-        </div>
+        <div class="box" id="right"></div>
     </div>
 
-    <div class="box">
-        <div class="block" id="footer">
-            Blog by <a class="hlink" href="http://iklone.org">iklone</a> 2020
-        </div>
-    </div>
+    <div id="footerLoad"></div>
 
     <script>
-        loadBlog()
+        loadParts();
+        loadBlog();
     </script>
 </body>
