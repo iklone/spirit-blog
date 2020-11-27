@@ -49,24 +49,32 @@ function setipsum() {
 //load in parts of page from external files
 async function loadParts() {
     //load header
-    response = await fetch("/header.html");
-    html = await response.text();
-    document.getElementById("headerLoad").innerHTML = html;
+    if (document.getElementById("headerLoad")) {
+        response = await fetch("/header.html");
+        html = await response.text();
+        document.getElementById("headerLoad").innerHTML = html;
+    }
 
     //load footer
-    response = await fetch("/footer.html");
-    html = await response.text();
-    document.getElementById("footerLoad").innerHTML = html;
+    if (document.getElementById("footerLoad")) {
+        response = await fetch("/footer.html");
+        html = await response.text();
+        document.getElementById("footerLoad").innerHTML = html;
+    }
 
     //load left pane with desciption
-    response = await fetch("/description.html");
-    html = await response.text();
-    document.getElementById("left").innerHTML = html;
+    if (document.getElementById("left")) {
+        response = await fetch("/description.html");
+        html = await response.text();
+        document.getElementById("left").innerHTML = html;
+    }
 
     //load right pane with archive
-    response = await fetch("/archive.html");
-    html = await response.text();
-    document.getElementById("right").innerHTML = html;
+    if (document.getElementById("right")) {
+        response = await fetch("/archive.html");
+        html = await response.text();
+        document.getElementById("right").innerHTML = html;
+    }
 
     if (document.getElementById("archiveList")) {
         loadArchive();
