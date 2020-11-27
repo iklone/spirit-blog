@@ -22,9 +22,9 @@
         }
 
         //load up retrieved data to page
-        async function loadData(title, date, img, textSrc) {
+        async function loadData(title, datetime, img, textSrc) {
             //set title
-            document.getElementById("pageTitle").innerHTML = title + " - iklone.org";
+            document.getElementById("pageTitle").innerHTML = title + " - Maid Spin";
             document.getElementById("blogTitle").innerHTML = title;
 
             //load image
@@ -34,6 +34,12 @@
             bodyResponse = await fetch("/posts/" + textSrc);
             bodyText = await bodyResponse.text();
             document.getElementById("blogBody").innerHTML = bodyText;
+
+             //load footer
+            //author on left
+            document.getElementById("blogFooterLeft").innerHTML = "Written by iklone";
+            //datetime on right
+            document.getElementById("blogFooterLeft").innerHTML = "Published " + datetime;
         }
 
         function loadBlog() {
@@ -77,7 +83,11 @@
             <div class="block">
                 <img id="blogImage">
                 <h1 id="blogTitle"></h1>
-                <div id="blogBody"></div>
+            </div>
+            <div class="block" id="blogBody"></div>
+            <div class="block">
+                <span id="blogFooterLeft"></span>
+                <span id="blogFooterRight"></span>
             </div>
         </div>
 
