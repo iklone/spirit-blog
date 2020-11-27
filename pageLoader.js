@@ -1,13 +1,13 @@
 //add item to archive list
-function addToArchive(id, title) {
+function addToArchive(id, title, datetime) {
     //create link
     newLink = document.createElement("a");
     newLink.setAttribute("class", "hlink");
     newLink.setAttribute("href", "/post/" + id);
-    newLink.innerText = title;
+    newLink.innerText = title + " | " + datetime;
 
     //add link to item
-    newListItem = document.createElement("li");
+    newListItem = document.createElement("div");
     newListItem.appendChild(newLink);
 
     //add item to list

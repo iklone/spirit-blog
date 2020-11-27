@@ -1,15 +1,33 @@
 /*background colour*/
 body {
-    background-color: #d8e6f3;
+    background-color: #e6ddd4;
 }
 
 /*block colour*/
 .block {
-    border: 1px solid #6565cd;
-    background-color: #c7c7ed;
+    /*border: 1px solid #6565cd;*/
+    background-color: #a2bcd7;
+    transition: 5s ease;
+}
+
+.block:hover {
+    background-color: #e8a4cd;
+    transition: 1s ease;
 }
 
 /*text colour*/
 body, .hlink {
     color: black;
+}
+
+#footerLoad {
+    position: relative;
+}
+
+#footerLoad img {
+    text-align: left;
+    position: absolute;
+    width:100%;
+    bottom:-1vh;
+    z-index:-1;
 }
