@@ -30,7 +30,15 @@ function loadArchive() {
 
 //load in lorem ipsum
 function setipsum() {
-    ipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+    ipsum = `<p>Class hierarchy.<br>
+    Nobody really decided on it,<br>
+    It was all in place before we even realised.<br>
+    The upper, middle and lower tiers.<br>
+    Overall we are from the upper to lower middle,<br>
+    Living each day in this delusional social structure.<br>
+    We've decided that we really don't want to reach the upper class,<br>
+    We're happy just being middle class romantics.
+    </p>`;
     ipsumClasses = document.getElementsByClassName("ipsum");
 
     for (ipsumClass in ipsumClasses) {
