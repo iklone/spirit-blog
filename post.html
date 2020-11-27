@@ -23,6 +23,11 @@
 
         //load up retrieved data to page
         async function loadData(title, datetime, img, textSrc) {
+            //if no text, 404
+            if (textSrc == "") {
+                window.location.href = "/404";
+            }
+
             //set title
             document.getElementById("pageTitle").innerHTML = title + " - Maid Spin";
             document.getElementById("blogTitle").innerHTML = title;
