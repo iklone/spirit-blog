@@ -1,3 +1,11 @@
+* {
+    transition: 5s ease;
+}
+
+a {
+    transition: 0s none;
+}
+
 body {
     font-family: "PT Sans", sans-serif;
     margin: 0;
@@ -58,12 +66,6 @@ h1 a {
     cursor: pointer;
 }
 
-@media (max-width: 1000px) {
-    .post {
-        width: 97%;
-    }
-}
-
 .post img {
     border-radius: 3vh;
     max-width: 100%;
@@ -89,4 +91,31 @@ h1 a {
     font-size: 30px;
     width: 100%;
     cursor: pointer;
+}
+
+#logo {
+    width: 50vw;
+    display: block;
+    cursor: pointer;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1%;
+    transition: 5s ease;
+}
+
+#logo:hover {
+    opacity: 0.5;
+}
+
+/*for vertical screens*/
+@media (max-width: 1000px) {
+    .post {
+        width: 97%;
+    }
+    
+    #logo {
+        width: 98vw;
+    }
 }
