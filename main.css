@@ -33,10 +33,6 @@ h1 a {
     justify-content: center;
 }
 
-#footer {
-    height: 2%;
-}
-
 #centre {
     width: 50%;
 }
@@ -109,6 +105,10 @@ h1 a {
     opacity: 0.5;
 }
 
+#phoneDescription {
+    display: none;
+}
+
 /*for vertical screens*/
 @media (max-width: 1000px) {
     .post {
@@ -117,5 +117,23 @@ h1 a {
     
     #logo {
         width: 98vw;
+    }
+
+    #left {
+        width: 0%;
+        display: none;
+    }
+
+    #right {
+        width: 0%;
+        display: none;
+    }
+
+    #centre {
+        width: 100%;
+    }
+
+    #phoneDescription {
+        display: block;
     }
 }
