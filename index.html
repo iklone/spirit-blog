@@ -16,6 +16,17 @@
             newImage = document.createElement("img");
             newImage.setAttribute("src", img);
 
+            //creat read more text
+            newReadMore = document.createElement("div");
+            newReadMore.setAttribute("class", "postReadMore");
+            newReadMore.innerText = "Click to Read Post";
+
+            //create image container div
+            newImageContainer = document.createElement("div");
+            newImageContainer.setAttribute("class", "postImageContainer");
+            newImageContainer.appendChild(newImage);
+            newImageContainer.appendChild(newReadMore);
+
             //create title
             newTitle = document.createElement("div");
             newTitle.setAttribute("class", "postTitle");
@@ -25,10 +36,11 @@
             newPost = document.createElement("div");
             newPost.setAttribute("class", "post");
             newPost.setAttribute("onclick", 'window.location.href = "/post/' + id + '";');
-            newPost.appendChild(newImage);
+            newPost.setAttribute("title", 'postTitle');
+            newPost.appendChild(newImageContainer);
             newPost.appendChild(newTitle);
 
-            //add to list
+            //add to post list
             postList = document.getElementById("postList");
             postList.appendChild(newPost);
             postNum++;
@@ -83,6 +95,6 @@
 
     <script>
         loadParts();
-        addPostBatch(6);
+        addPostBatch(4);
     </script>
 </body>
