@@ -23,7 +23,7 @@ h1 a {
     text-align: center;
 }
 
-.hlink:hover {
+a:hover {
     opacity: 0.5;
 }
 

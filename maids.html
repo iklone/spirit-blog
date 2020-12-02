@@ -1,0 +1,226 @@
+<head>
+    <title id="pageTitle">Maid Spin</title>
+    <link rel="icon" type="image/png" href="/files/favicon.png"/>
+
+    <meta http-equiv="content-type" content="charset=utf-8"/>
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/main.css">
+    <link rel="stylesheet" type="text/css" href="/post.css">
+    <link rel="stylesheet" type="text/css" href="/maid.css">
+    <link rel="stylesheet" type="text/css" href="/modal.css">
+    <link rel="stylesheet" type="text/css" href="/heaven.css">
+
+    <script>
+        maria = ["dance", "disgust", "glasses", "gong", "languages", "neko", "okay", "phone", "romance", "scold", "sing", "snooker"];
+        postNum = 0;
+
+        function setipsum() {
+            ipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+            ipsumClasses = document.getElementsByClassName("ipsum");
+
+            for (ipsumClass in ipsumClasses) {
+                ipsumClasses[ipsumClass].innerHTML = ipsum;
+            }
+        }
+
+        //get GET variables
+        function getGET(name) { 
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+
+            for (var i=0;i<vars.length;i++) { 
+                var pair = vars[i].split("=");
+                if (pair[0] == name) { 
+                    return pair[1];
+                }
+            }
+
+            return "id";
+        }
+
+        //add maid to table
+        function addRow(ID, name, series, style, MAL, seriesMAL, seriesType, desc) {
+            //create ID cell
+            newIDcell = document.createElement("td");
+            newIDcell.innerHTML = "#" + ID;
+
+            //create name cell
+            newNameCell = document.createElement("td");
+            newNameCell.innerHTML = name;
+
+            //create series cell
+            newSeriesCell = document.createElement("td");
+            newSeriesCell.innerHTML = series;
+
+            //create style cell
+            newStyleCell = document.createElement("td");
+            newStyleCell.innerHTML = style;
+
+            //create row
+            newRow = document.createElement("tr");
+            newRowFunction = 'openModal("' + name + '", "' + series + '", "' + desc + '", "' + style + '", "' + seriesType + '", "' + MAL + '", "' + seriesMAL + '")';
+            newRow.setAttribute("onclick", newRowFunction);
+            newRow.appendChild(newIDcell);
+            newRow.appendChild(newNameCell);
+            newRow.appendChild(newSeriesCell);
+            newRow.appendChild(newStyleCell);
+
+            //append row to table
+            document.getElementById("maidDB").appendChild(newRow);
+        }
+
+        function loadTable() {
+            //live code with DB
+            var xhttp;
+            xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                    eval(this.responseText);
+                }
+            };
+            xhttp.open("GET", "/getMaids.php?sort=" + getGET("sort"), true);
+            xhttp.send();
+
+            //code for testing offline
+            //loadData(blogID, 0, "../posts/glasses.jpg", blogID);
+        }
+    </script>
+
+    <script src="/pageLoader.js"></script>
+</head>
+
+<body>
+    <div id="headerLoad"></div>
+
+    <div id="body">
+        <div class="box" id="left"></div>
+
+        <div class="box" id="centre">
+            <div class="block">
+                <h1 id="blogTitle">The Maid List</h1>
+                <div>
+                    An ever-expanding database of every maid in anime, manga and games. This is an eternal work in progress. The criteria for admission can be read <a href="#" onclick="openRules()">here</a>. You can click on a row for details, or a column title to sort.<br>
+                    Long live maids.
+                </div>
+            </div>
+            <div class="block" id="blogBody">
+                <table id="maidDB">
+                    <tr id="topRow">
+                        <th><a href="./maids">ID</a></th>
+                        <th style="min-width: 40%;"><a href="./maids?sort=forename">Name</a></th>
+                        <th><a href="./maids?sort=series">Series</a></th>
+                        <th><a href="./maids?sort=style">Style</a></th>
+                    </tr>
+                </table>
+            </div>
+            <div class="block" id="blogFooter">
+                <span id="blogFooterLeft"></span>
+                <span id="blogFooterRight"></span>
+            </div>
+        </div>
+
+        <div class="box" id="right"></div>
+    </div>
+
+    <div id="footerLoad"></div>
+
+    <div id="maidModal" class="modal">
+        <div class="modalContent">
+            <div class="modalHeader">
+                <span id="modalClose" class="close">&times;</span>
+                <h2 id="modalName"></h2>
+            </div>
+            <div class="modalBody">
+                <div id="maidIntro"></div>
+                <hr>
+                <div id="maidDesc"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        loadParts();
+        loadTable();
+    </script>
+
+    <script>
+        var modal = document.getElementById("maidModal");
+        var span = document.getElementById("modalClose");
+
+        function openRules() {
+            document.getElementById("modalName").innerHTML = "Rules of the Maid List";
+            document.getElementById("maidIntro").innerHTML = "Maids will be admitted to the list if and only if they fulfill all categories:";
+            document.getElementById("maidDesc").innerHTML = "\
+            <ol>\
+                <li>The character is from Japanese media.</li>\
+                <li>The character's primary form is 2D.</li>\
+                <li>The character is female.</li>\
+                <li>The character wears a maid uniform or are recognised as a maid by other characters.</li>\
+                <li>The character plays the part of a maid as their primary role, not just as a one-off time.</li>\
+            </ol>";
+
+            modal.style.display = "block";
+        }
+
+        async function openModal(name, series, desc, type, seriesType, malID, seriesMalID) {
+            //if char MAL ID available, set title as link
+            if (malID) {
+                titleText = '<a href="https://myanimelist.net/character/' + malID + '">' + name + '</a>';
+            } else {
+                titleText = name;
+            }
+            document.getElementById("modalName").innerHTML = titleText;
+            
+            //Build intro text
+            //If series MAL ID available, set series as link
+            if (seriesMalID) {
+                introText = name + ' is a maid from the series <a href="https://myanimelist.net/' + seriesType + '/' + seriesMalID + '">' + series + "</a>.";
+            } else {
+                introText = name + " is a maid from the series " + series + ".";
+            }
+            
+            //Make sure a/an is grammatical
+            if (type.match('^[aieouAIEOU].*')) {
+                introText = introText + "<br>She is an ";
+            } else {
+                introText = introText + "<br>She is a ";
+            }
+            introText = introText + type.toLowerCase() + "-type maid.";
+            document.getElementById("maidIntro").innerHTML = introText;
+            
+            //show modal (before async functions)
+            modal.style.display = "block";
+            
+            //set description. If no custom desc, grab from MAL if MAL ID available
+            if (desc == "") {
+                if (malID != "") {
+                    await getDesc(malID);
+                }
+            } else {
+                document.getElementById("maidDesc").innerHTML = desc;
+            }
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        async function getDesc(id) {
+            response = await fetch("https://api.jikan.moe/v3/character/" + id);
+            data = await response.json();
+
+
+            desc = data["about"].replace(/(?:\\r\\n|\\r|\\n)/g, '<br>');
+            desc = desc + "<br><i>[Description taken from MyAnimeList.com.]</i>";
+            document.getElementById("maidDesc").innerHTML = desc;
+        }
+    </script>
+</body>

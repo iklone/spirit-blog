@@ -1,0 +1,19 @@
+#maidDB {
+    text-align: center;
+    text-decoration: none;
+    width: 96%;
+    margin: 2%;;
+}
+
+td {
+    cursor: pointer;
+}
+
+tr {
+    transition: 0s none;
+    text-align: center;
+}
+
+tr:not(#topRow):hover {
+    opacity: 0.5;
+}
