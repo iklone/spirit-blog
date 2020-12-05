@@ -130,6 +130,20 @@ a:hover {
     display: none;
 }
 
+#buttonBar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.buttonLink {
+    margin: 1vh;
+    padding: 1vh;
+    text-decoration: none;
+    border-radius: 1vh;
+}
+
 /*for vertical screens*/
 @media (max-width: 1000px) {
     .post {

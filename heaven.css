@@ -4,14 +4,19 @@ body {
 }
 
 /*block colour*/
-.block {
-    /*border: 1px solid #6565cd;*/
+.block, .buttonLink {
     background-color: #a2bcd7;
+}
+
+.block {
     transition: 5s ease;
 }
 
-.block:hover {
+.block:hover, .buttonLink:hover {
     background-color: #e8a4cd;
+}
+
+.block:hover {
     transition: 1s ease;
 }
 
