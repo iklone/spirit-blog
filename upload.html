@@ -1,0 +1,26 @@
+<head>
+
+</head>
+<body>
+    <h1>Upload Post</h1>
+    <hr>
+
+    <form id="uploadForm" action="/upload.php" method="POST">
+        <label for="title">Post Title:</label><br>
+        <input type="text" id="title" name="title">
+        <br>
+        <label for="idText">Post ID (alpha only, unique):</label><br>
+        <input type="text" id="idText" name="idText">
+        <br>
+        <label for="imgURL">URL to Image:</label><br>
+        <input type="text" id="imgURL" name="imgURL">
+        <br>
+        <label for="body">Post Body (HTML):</label><br>
+        <textarea id="body" name="body" rows="12" cols="50"></textarea>
+        <hr>
+        <label for="password">Password:</label><br>
+        <input type="text" id="password" name="password">
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
