@@ -37,7 +37,7 @@
             newPost = document.createElement("div");
             newPost.setAttribute("class", "post");
             newPost.setAttribute("onclick", 'window.location.href = "/post/' + id + '";');
-            newPost.setAttribute("title", 'postTitle');
+            newPost.setAttribute("title", "/post/" + id);
             newPost.appendChild(newImageContainer);
             newPost.appendChild(newTitle);
 
