@@ -1,0 +1,73 @@
+<head>
+    <title>Maid Spin</title>
+    <link rel="icon" type="image/png" href="/files/favicon.png"/>
+
+    <meta http-equiv="content-type" content="charset=utf-8"/>
+
+    <meta name="description" content="iklone's Anime & Manga Blog">
+    <meta name="keywords" content="anime, manga, blog, maid, meido, mecha">
+    <meta name="author" content="iklone">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/main.css">
+    <link rel="stylesheet" type="text/css" href="/heaven.css">
+
+    <script src="/pageLoader.js"></script>
+</head>
+
+<body>
+    <div id="headerLoad"></div>
+
+    <div id="body">
+        <div class="box" id="left"></div>
+
+        <div class="box" id="centre">
+            <div class="block">
+                <h1 id="blogTitle">Contact Page</h1>
+                <p>
+                    If you would like to contact me for any reason, you can do so here. The safest way to contact me is to send me a message through my <a href="https://twitter.com/iklone">Twitter</a> or my <a href="https://myanimelist.net/profile/iklone">MAL</a> account.
+                </p>
+                <p>
+                    If you would like to send me an email instead, you may do so through the form below:
+                </p>
+            </div>
+            <div class="block" id="blogBody">
+                <form id="contactForm" action="/sendMail.php" method="post" style="margin-left: 2%; text-align: left;">
+                    <div class="formItem">
+                        <label for="name">Your Name:</label><br>
+                        <input type="text" id="name" name="name">
+                    </div>
+                    <div class="formItem">
+                        <label for="subject">Email Subject:</label><br>
+                        <input type="text" id="subject" name="subject">
+                    </div>
+                    <div class="formItem">
+                        <label for="emailAddress">Email Address:</label><br>
+                        <input type="text" id="emailAddress" name="emailAddress">
+                    </div>
+                    <hr>
+                    <div class="formItem">
+                        <label for="body">Message:</label><br>
+                        <textarea id="body" name="body" cols="50" rows="10"></textarea>
+                    </div>
+                    <div class="formItem">
+                        <label for="test">What is the first character of your message? (security question):</label><br>
+                        <input type="text" id="test" name="test">
+                    </div>
+                    <br>
+                    <a class="buttonLink" href="javascript:{}" onclick="document.getElementById('contactForm').submit();" style="border: 1px solid gray;">Submit</a>
+                </form>
+            </div>
+        </div>
+
+        <div class="box" id="right"></div>
+    </div>
+
+    <div id="footerLoad"></div>
+
+    <script>
+        loadParts();
+        addPostBatch(6);
+    </script>
+</body>
