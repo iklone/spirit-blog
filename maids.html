@@ -9,11 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/main.css">
-    <link rel="stylesheet" type="text/css" href="/post.css">
-    <link rel="stylesheet" type="text/css" href="/maid.css">
-    <link rel="stylesheet" type="text/css" href="/modal.css">
-    <link rel="stylesheet" type="text/css" href="/heaven.css">
+    <link rel="stylesheet" type="text/css" href="./main.css">
+    <link rel="stylesheet" type="text/css" href="./post.css">
+    <link rel="stylesheet" type="text/css" href="./maid.css">
+    <link rel="stylesheet" type="text/css" href="./modal.css">
+    <link rel="stylesheet" type="text/css" href="./heaven.css">
 
     <script>
         function setipsum() {
@@ -125,14 +125,19 @@
 
     <div id="maidModal" class="modal">
         <div class="modalContent">
-            <div class="modalHeader">
-                <span id="modalClose" class="close">&times;</span>
-                <h2 id="modalName"></h2>
+            <div class="leftHide" id="maidImageDIV">
+                <img id="maidImage" src="">
             </div>
-            <div class="modalBody">
-                <div id="maidIntro"></div>
-                <hr>
-                <div id="maidDesc"></div>
+            <div class="modalRight">
+                <div class="modalHeader">
+                    <span id="modalClose" class="close">&times;</span>
+                    <h2 id="modalName"></h2>
+                </div>
+                <div class="modalBody">
+                    <div id="maidIntro"></div>
+                    <hr>
+                    <div id="maidDesc"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -161,7 +166,22 @@
             modal.style.display = "block";
         }
 
+        //reset modal
+        function clearModal() {
+            //image
+            document.getElementById("maidImageDIV").setAttribute("class", "leftHide");
+            document.getElementById("maidImage").setAttribute("src", "");
+
+            //text
+            document.getElementById("modalName").innerHTML = "";
+            document.getElementById("maidIntro").innerHTML = "";
+            document.getElementById("maidDesc").innerHTML = "";
+        }
+
         async function openModal(name, series, desc, type, seriesType, malID, seriesMalID) {
+            //clearModal of previous maid
+            clearModal();
+
             //if char MAL ID available, set title as link
             if (malID) {
                 titleText = '<a href="https://myanimelist.net/character/' + malID + '">' + name + '</a>';
@@ -191,11 +211,10 @@
             modal.style.display = "block";
             
             //set description. If no custom desc, grab from MAL if MAL ID available
-            if (desc == "") {
-                if (malID != "") {
-                    await getDesc(malID);
-                }
-            } else {
+            if (malID != "") {
+                await getDesc(malID);
+            }
+            if (desc != "") {
                 document.getElementById("maidDesc").innerHTML = desc;
             }
         }
@@ -210,14 +229,20 @@
             }
         }
 
+        //get MAL data (both desc and image)
         async function getDesc(id) {
             response = await fetch("https://api.jikan.moe/v3/character/" + id);
             data = await response.json();
 
-
+            //description
             desc = data["about"].replace(/(?:\\r\\n|\\r|\\n)/g, '<br>');
             desc = desc + "<br><i>[Description taken from MyAnimeList.com.]</i>";
             document.getElementById("maidDesc").innerHTML = desc;
+
+            //image (show and set)
+            imgURL = data["image_url"];
+            document.getElementById("maidImageDIV").setAttribute("class", "leftShow");
+            document.getElementById("maidImage").setAttribute("src", imgURL);
         }
     </script>
 </body>

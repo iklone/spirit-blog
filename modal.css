@@ -22,6 +22,9 @@
     padding: 1vh;
     border-radius: 3vh;
     text-align: center;
+    
+    height: fit-content;
+    overflow: auto;
 }
 
 @keyframes animateTop {
@@ -53,6 +56,22 @@
 
 .modalBody div {
     padding: 2vh, 0;
+}
+
+.leftShow {
+    float: left;
+    width: 25%;
+    height: fit-content;
+}
+
+.leftHide {
+    width: 0%;
+    display: none;
+}
+
+#maidImage {
+    width: 90%;
+    margin: 5%;
 }
 
 /*for vertical screens*/
