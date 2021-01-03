@@ -60,6 +60,7 @@ async function loadParts() {
         response = await fetch("/footer.html");
         html = await response.text();
         document.getElementById("footerLoad").innerHTML = html;
+        document.getElementById("fcYear").innerHTML = new Date().getFullYear();
     }
 
     //load left pane with desciption
