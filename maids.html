@@ -152,6 +152,10 @@
         var span = document.getElementById("modalClose");
 
         function openRules() {
+            //clearModal of previous maid
+            clearModal();
+
+            //load rules
             document.getElementById("modalName").innerHTML = "Rules of the Maid List";
             document.getElementById("maidIntro").innerHTML = "Maids will be admitted to the list if and only if they fulfill all categories:";
             document.getElementById("maidDesc").innerHTML = "\
@@ -163,6 +167,7 @@
                 <li>The character plays the part of a maid as their primary role, not just as a one-off time.</li>\
             </ol>";
 
+            //show modal
             modal.style.display = "block";
         }
 
@@ -210,19 +215,21 @@
             //show modal (before async functions)
             modal.style.display = "block";
             
-            //set description. If no custom desc, grab from MAL if MAL ID available
+            //set description/image. If no custom desc, grab from MAL if MAL ID available
             if (malID != "") {
                 await getDesc(malID);
             }
+
+            //override with custom desc
             if (desc != "") {
                 document.getElementById("maidDesc").innerHTML = desc;
             }
         }
 
+        //hide on off click
         span.onclick = function() {
             modal.style.display = "none";
         }
-
         window.onclick = function(event) {
             if (event.target == modal) {
                 modal.style.display = "none";
