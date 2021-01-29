@@ -16,6 +16,8 @@
     <link rel="stylesheet" type="text/css" href="/heaven.css">
 
     <script>
+        var nsfw = false;
+
         function setipsum() {
             ipsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
             ipsumClasses = document.getElementsByClassName("ipsum");
@@ -41,34 +43,36 @@
         }
 
         //add maid to table
-        function addRow(ID, name, series, style, MAL, seriesMAL, seriesType, desc) {
-            //create ID cell
-            newIDcell = document.createElement("td");
-            newIDcell.innerHTML = "#" + ID;
+        function addRow(ID, name, series, style, MAL, seriesMAL, seriesType, desc, nsfwKA) {
+            if (!(!nsfw && nsfwKA == 1)) { //filter out nsfw entries if no nsfw is on
+                //create ID cell
+                newIDcell = document.createElement("td");
+                newIDcell.innerHTML = "#" + ID;
 
-            //create name cell
-            newNameCell = document.createElement("td");
-            newNameCell.innerHTML = name;
+                //create name cell
+                newNameCell = document.createElement("td");
+                newNameCell.innerHTML = name;
 
-            //create series cell
-            newSeriesCell = document.createElement("td");
-            newSeriesCell.innerHTML = series;
+                //create series cell
+                newSeriesCell = document.createElement("td");
+                newSeriesCell.innerHTML = series;
 
-            //create style cell
-            newStyleCell = document.createElement("td");
-            newStyleCell.innerHTML = style;
+                //create style cell
+                newStyleCell = document.createElement("td");
+                newStyleCell.innerHTML = style;
 
-            //create row
-            newRow = document.createElement("tr");
-            newRowFunction = 'openModal("' + name + '", "' + series + '", "' + desc + '", "' + style + '", "' + seriesType + '", "' + MAL + '", "' + seriesMAL + '")';
-            newRow.setAttribute("onclick", newRowFunction);
-            newRow.appendChild(newIDcell);
-            newRow.appendChild(newNameCell);
-            newRow.appendChild(newSeriesCell);
-            newRow.appendChild(newStyleCell);
+                //create row
+                newRow = document.createElement("tr");
+                newRowFunction = 'openModal("' + name + '", "' + series + '", "' + desc + '", "' + style + '", "' + seriesType + '", "' + MAL + '", "' + seriesMAL + '")';
+                newRow.setAttribute("onclick", newRowFunction);
+                newRow.appendChild(newIDcell);
+                newRow.appendChild(newNameCell);
+                newRow.appendChild(newSeriesCell);
+                newRow.appendChild(newStyleCell);
 
-            //append row to table
-            document.getElementById("maidDB").appendChild(newRow);
+                //append row to table
+                document.getElementById("maidDB").appendChild(newRow);
+            }
         }
 
         function loadTable() {
@@ -86,6 +90,28 @@
 
             //code for testing offline
             //loadData(blogID, 0, "../posts/glasses.jpg", blogID);
+        }
+
+        //toggle nsfw showing
+        function togNSFW() {
+            if (nsfw) {
+                nsfw = false;
+            } else {
+                nsfw = true;
+            }
+            setNSFWButton();
+
+            document.getElementById("maidDB").innerHTML = "";
+            loadTable();
+        }
+
+        //fix nsfw button text
+        function setNSFWButton() {
+            if (nsfw) {
+                document.getElementById("NSFWButton").innerHTML = "SHOWING";
+            } else {
+                document.getElementById("NSFWButton").innerHTML = "HIDDEN";
+            }
         }
     </script>
 
@@ -165,7 +191,15 @@
                 <li>The character is female.</li>\
                 <li>The character wears a maid uniform or are recognised as a maid by other characters.</li>\
                 <li>The character plays the part of a maid as their primary role, not just as a one-off time.</li>\
-            </ol>";
+            </ol>\
+            <hr>\
+            <br>" + '\
+            NSFW entries:\
+            <a class="buttonLink" id="NSFWButton" href="javascript:{}" onclick="togNSFW();" style="border: 1px solid gray;">HIDDEN</a>\
+            <br>\
+            <br>';
+
+            setNSFWButton();
 
             //show modal
             modal.style.display = "block";
