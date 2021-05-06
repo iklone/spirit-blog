@@ -28,7 +28,7 @@
                     }
                 }
             };
-            xhttp.open("GET", "/getArticle.php?id=" + blogID, true);
+            xhttp.open("GET", "/php/getArticle.php?id=" + blogID, true);
             xhttp.send();
         }
 
@@ -57,7 +57,7 @@
     <h1>Edit Post</h1>
     <hr>
 
-    <form id="uploadForm" target="_blank" action="/edit.php" method="POST">
+    <form id="uploadForm" target="_blank" action="/php/edit.php" method="POST">
         <label for="title">Post Title (set to DELETE to delete article):</label><br>
         <input type="text" id="title" name="title">
         <br>
