@@ -17,7 +17,7 @@
     //delete post
     if ($title == "DELETE") {
         //delete body file
-        $oldFileURL = "./posts/" . $idText;
+        $oldFileURL = "../posts/" . $idText;
         unlink($oldFileURL);
         echo "Deleted file " . $oldFileURL;
         echo "<br>";
@@ -34,7 +34,7 @@
     }
 
     //save body to file
-    $newFileURL = "./posts/" . $idText;
+    $newFileURL = "../posts/" . $idText;
     $newPostFile = fopen($newFileURL, "w") or die("Unable to create file");
     fwrite($newPostFile, $body);
     fclose($newPostFile);
@@ -54,5 +54,5 @@
     $result = mysqli_query($conn, $query);
     echo "Saved metadata to DB";
     echo "<br>";
-    echo '<a href="./post/' . $idText . '" target="_blank">Click to view post</a>';
+    echo '<a href="/post/' . $idText . '" target="_blank">Click to view post</a>';
 ?>

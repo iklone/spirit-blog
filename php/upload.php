@@ -15,7 +15,7 @@
     $body = $_POST["body"];
 
     //save body to file
-    $newFileURL = "./posts/" . $idText;
+    $newFileURL = "../posts/" . $idText;
     $newPostFile = fopen($newFileURL, "w") or die("Unable to create file");
     fwrite($newPostFile, $body);
     fclose($newPostFile);
@@ -35,5 +35,5 @@
     $result = mysqli_query($conn, $query);
     echo "Saved metadata to DB";
     echo "<br>";
-    echo '<a href="./post/' . $idText . '" target="_blank">Click to view post</a>';
+    echo '<a href="/post/' . $idText . '" target="_blank">Click to view post</a>';
 ?>
