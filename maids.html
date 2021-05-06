@@ -9,11 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/main.css">
-    <link rel="stylesheet" type="text/css" href="/post.css">
-    <link rel="stylesheet" type="text/css" href="/maid.css">
-    <link rel="stylesheet" type="text/css" href="/modal.css">
-    <link rel="stylesheet" type="text/css" href="/heaven.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/post.css">
+    <link rel="stylesheet" type="text/css" href="/css/maid.css">
+    <link rel="stylesheet" type="text/css" href="/css/modal.css">
+    <link rel="stylesheet" type="text/css" href="/css/heaven.css">
 
     <script>
         var nsfw = false;
@@ -85,7 +85,7 @@
                     eval(this.responseText);
                 }
             };
-            xhttp.open("GET", "/getMaids.php?sort=" + getGET("sort"), true);
+            xhttp.open("GET", "/php/getMaids.php?sort=" + getGET("sort"), true);
             xhttp.send();
 
             //code for testing offline
@@ -115,7 +115,7 @@
         }
     </script>
 
-    <script src="/pageLoader.js"></script>
+    <script src="/js/pageLoader.js"></script>
 </head>
 
 <body>
