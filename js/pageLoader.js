@@ -24,7 +24,7 @@ function loadArchive() {
             eval(this.responseText);
         }
     };
-    xhttp.open("GET", "/getArchive.php", true);
+    xhttp.open("GET", "/php/getArchive.php", true);
     xhttp.send();
 }
 
